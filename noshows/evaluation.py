@@ -1,4 +1,4 @@
-"""Model evaluation and appointment outreach cost calculations."""
+"""Measure the model and the real business cost of its decisions."""
 
 import numpy as np
 import pandas as pd
@@ -102,60 +102,3 @@ def savings_interval(actual, decisions, baseline_calls, seed=11, repeats=2000):
         proposed = calculate_cost(actual[sampled], decisions[sampled])
         savings[index] = original - proposed
     return [round(float(x), 2) for x in np.percentile(savings, [2.5, 97.5])]
-
-
-def evaluate_predictions(y_true, y_pred, y_probability) -> dict:
-    """Calculate classification metrics."""
-
-    return {
-        "accuracy": float(accuracy_score(y_true, y_pred)),
-        "precision": float(precision_score(y_true, y_pred, zero_division=0)),
-        "recall": float(recall_score(y_true, y_pred, zero_division=0)),
-        "f1": float(f1_score(y_true, y_pred, zero_division=0)),
-        "roc_auc": float(roc_auc_score(y_true, y_probability)),
-        "cost": calculate_cost(y_true, y_pred),
-    }
-
-
-def get_threshold_predictions(probabilities, threshold: float) -> np.ndarray:
-    """Convert predicted probabilities into binary decisions."""
-
-    return (np.asarray(probabilities) >= threshold).astype(int)
-
-
-def find_best_threshold(
-    model,
-    X_train: pd.DataFrame,
-    y_train: pd.Series,
-    cv,
-) -> tuple[float, pd.DataFrame]:
-    """Select a threshold using out-of-fold training probabilities."""
-
-    probabilities = cross_val_predict(
-        model,
-        X_train,
-        y_train,
-        cv=cv,
-        method="predict_proba",
-        n_jobs=-1,
-    )[:, 1]
-
-    results = []
-
-    for threshold in np.arange(0.05, 0.951, 0.01):
-        predictions = get_threshold_predictions(
-            probabilities,
-            threshold,
-        )
-
-        results.append(
-            {
-                "threshold": round(float(threshold), 2),
-                "cost": calculate_cost(y_train, predictions),
-            }
-        )
-
-    results_df = pd.DataFrame(results)
-    best_row = results_df.loc[results_df["cost"].idxmin()]
-
-    return float(best_row["threshold"]), results_df
