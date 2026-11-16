@@ -68,7 +68,11 @@ def main():
     comparisons = []
     for name, classifier in candidate_models().items():
         scores = cross_validate(
-            build_pipeline(classifier), x_train, y_train, cv=cv, scoring=SCORING,
+            build_pipeline(classifier),
+            x_train,
+            y_train,
+            cv=cv,
+            scoring=SCORING,
             n_jobs=1,
         )
         item = {"model": name}
@@ -86,8 +90,7 @@ def main():
     logistic = comparison.loc[comparison["model"] == "Logistic regression"].iloc[0]
     winner = comparison.loc[comparison["roc_auc_mean"].idxmax()]
     within_spread = (
-        winner["roc_auc_mean"] - logistic["roc_auc_mean"]
-        <= winner["roc_auc_std"]
+        winner["roc_auc_mean"] - logistic["roc_auc_mean"] <= winner["roc_auc_std"]
     )
     selection_reason = (
         "Logistic regression is easy to explain and its ROC-AUC is within one "
@@ -142,7 +145,11 @@ def main():
             LogisticRegression(max_iter=2000, random_state=SEED),
             numeric_features=[*NUMERIC_FEATURES, "fee_charged"],
         ),
-        leaked_training, y_train, cv=cv, scoring="roc_auc", n_jobs=1,
+        leaked_training,
+        y_train,
+        cv=cv,
+        scoring="roc_auc",
+        n_jobs=1,
     )["test_score"]
     print(f"Honest ROC-AUC: {logistic['roc_auc_mean']:.4f}")
     print(f"LEAKING fee_charged ROC-AUC: {np.mean(leaky_auc):.4f} (NOT shipped)")
@@ -200,17 +207,20 @@ def main():
         "beats_both_baselines": metrics["cost"] < baseline,
     }
     save_json(MODELS / "model_info.json", info)
-    save_json(REPORTS / "metrics.json", {
-        "test_metrics": metrics,
-        "cost_comparison": costs,
-        "bootstrap_95pct_savings_vs_nobody": interval,
-        "bootstrap_95pct_savings_vs_everybody": interval_everybody,
-        "leakage_experiment": {
-            "honest_cv_auc": float(logistic["roc_auc_mean"]),
-            "after_visit_fee_cv_auc": float(np.mean(leaky_auc)),
+    save_json(
+        REPORTS / "metrics.json",
+        {
+            "test_metrics": metrics,
+            "cost_comparison": costs,
+            "bootstrap_95pct_savings_vs_nobody": interval,
+            "bootstrap_95pct_savings_vs_everybody": interval_everybody,
+            "leakage_experiment": {
+                "honest_cv_auc": float(logistic["roc_auc_mean"]),
+                "after_visit_fee_cv_auc": float(np.mean(leaky_auc)),
+            },
+            "tuning_conclusion": tuning_conclusion,
         },
-        "tuning_conclusion": tuning_conclusion,
-    })
+    )
     print("\nSaved model, metadata, comparison, threshold search, and test report.")
 
 

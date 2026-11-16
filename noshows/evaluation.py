@@ -51,11 +51,13 @@ def choose_threshold(
     for threshold in THRESHOLD_GRID:
         decisions = make_calls(probabilities, threshold)
         rows.append(
-            {"threshold": float(threshold),
-             "training_oof_cost": calculate_cost(
-                actual, decisions, call_cost, miss_cost
-            ),
-             "calls": int(decisions.sum())}
+            {
+                "threshold": float(threshold),
+                "training_oof_cost": calculate_cost(
+                    actual, decisions, call_cost, miss_cost
+                ),
+                "calls": int(decisions.sum()),
+            }
         )
     table = pd.DataFrame(rows)
     best_row = table.loc[table["training_oof_cost"].idxmin()]
