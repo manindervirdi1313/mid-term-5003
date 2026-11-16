@@ -25,8 +25,8 @@ Thumbs.db
 
 
 # Generated reports
-reports/*.csv
-reports/*.json
+# reports/*.csv
+# reports/*.json
 
 # Python coverage
 .coverage

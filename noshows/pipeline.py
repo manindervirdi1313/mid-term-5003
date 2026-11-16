@@ -47,7 +47,6 @@ def split_appointments(frame):
     )
 
 
-
 def build_preprocessor() -> ColumnTransformer:
     """Build preprocessing steps for numeric and categorical features."""
 

@@ -1,52 +1,78 @@
 {
-    "sklearn_version": "1.7.2",
-    "seed": 11,
-    "threshold": 0.48,
-    "feature_columns": [
-        "lead_days",
-        "age",
-        "prior_no_shows",
-        "hour",
-        "first_visit",
-        "distance_km",
-        "weekday",
-        "booking",
-        "insurance",
-        "treatment"
-    ],
-    "numeric_features": [
-        "lead_days",
-        "age",
-        "prior_no_shows",
-        "hour",
-        "first_visit",
-        "distance_km"
-    ],
-    "categorical_features": [
-        "weekday",
-        "booking",
-        "insurance",
-        "treatment"
-    ],
-    "best_params": {
-        "classifier__C": 0.1,
-        "classifier__class_weight": "balanced"
-    },
-    "best_cv_roc_auc": 0.7274517979612083,
-    "test_results": {
-        "accuracy": 0.666,
-        "precision": 0.41743119266055045,
-        "recall": 0.6946564885496184,
-        "f1": 0.5214899713467048,
-        "roc_auc": 0.7283352986201618,
-        "cost": 6288.0
-    },
-    "baseline_costs": {
-        "nobody_contacted": 9170.0,
-        "everybody_contacted": 8000.0,
-        "trained_model": 6288.0
-    },
-    "model_beats_both_baselines": true,
-    "train_rows": 3000,
-    "test_rows": 1000
+  "beats_both_baselines": true,
+  "best_settings": {
+    "classifier__C": 0.1,
+    "classifier__class_weight": "balanced"
+  },
+  "bootstrap_95pct_savings_vs_everybody": [
+    1101.97,
+    2306.05
+  ],
+  "bootstrap_95pct_savings_vs_nobody": [
+    2183.95,
+    3635.02
+  ],
+  "categorical_features": [
+    "weekday",
+    "booking",
+    "insurance",
+    "treatment"
+  ],
+  "excluded_columns": [
+    "appointment_id",
+    "fee_charged",
+    "no_show"
+  ],
+  "feature_columns": [
+    "lead_days",
+    "age",
+    "prior_no_shows",
+    "hour",
+    "first_visit",
+    "distance_km",
+    "weekday",
+    "booking",
+    "insurance",
+    "treatment"
+  ],
+  "grid_combinations": 6,
+  "grid_scoring": "roc_auc",
+  "honest_roc_auc_mean": 0.7272993918132018,
+  "leaky_roc_auc_mean": 0.9229141205733923,
+  "model_choice": "Logistic regression (GridSearchCV)",
+  "numeric_features": [
+    "lead_days",
+    "age",
+    "prior_no_shows",
+    "hour",
+    "first_visit",
+    "distance_km"
+  ],
+  "scikit_learn_version": "1.9.1",
+  "seed": 11,
+  "selection_reason": "Logistic regression is easy to explain and its ROC-AUC is within one five-fold standard deviation of the top candidate.",
+  "test_costs": {
+    "call_everybody": 8000.0,
+    "call_nobody": 9170.0,
+    "our_model": 6288.0,
+    "savings_vs_cheaper_baseline": 1712.0
+  },
+  "test_metrics": {
+    "accuracy": 0.666,
+    "calls": 436,
+    "cost": 6288.0,
+    "f1": 0.5214899713467048,
+    "precision": 0.41743119266055045,
+    "recall": 0.6946564885496184,
+    "roc_auc": 0.7283352986201618
+  },
+  "test_no_show_count": 262,
+  "test_rows": 1000,
+  "threshold": 0.48,
+  "train_rows": 3000,
+  "tuned_cv_roc_auc": 0.7274517979612083,
+  "tuning_conclusion": "Tuning did not beat the untuned model by more than its fold-to-fold spread.",
+  "tuning_gain": 0.00015240614800648977,
+  "untuned_cv_roc_auc": 0.7272993918132018,
+  "untuned_cv_roc_auc_std": 0.01170017446267386
 }

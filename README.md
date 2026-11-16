@@ -53,7 +53,8 @@ This creates the trained model and model information files in the `models/` dire
 ### 4. Launch the application
 
 ```bash
-python app.py
+#python app.py
+gradio app.py
 ```
 
 Open the local Gradio address displayed in the terminal, usually:
