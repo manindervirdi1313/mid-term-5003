@@ -1,0 +1,10 @@
+name: midterm-5003
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - -r requirements-dev.txt
