@@ -63,8 +63,8 @@ def test_prediction_contains_contact_decision(predictor, valid_appointment):
 
     assert isinstance(result["should_contact"], bool)
     assert result["action"] in {
-        "Contact patient",
-        "No contact needed",
+        "Call the patient",
+        "No call needed",
     }
 
 
