@@ -30,8 +30,8 @@ def make_valid_appointment(**overrides):
 @pytest.mark.parametrize(
     ("field", "value"),
     [
-        ("lead_days", 61),
-        ("age", 15),
+        ("lead_days", 121),
+        ("age", 11),
         ("prior_no_shows", -1),
         ("hour", 18),
         ("weekday", "saturday"),
@@ -39,7 +39,7 @@ def make_valid_appointment(**overrides):
         ("insurance", "unknown"),
         ("treatment", "unknown"),
         ("first_visit", 2),
-        ("distance_km", 61.0),
+        ("distance_km", 151.0),
     ],
 )
 def test_invalid_fields_raise_value_error(field, value):

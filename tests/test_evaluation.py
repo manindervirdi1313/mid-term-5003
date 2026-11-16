@@ -5,7 +5,7 @@ import pytest
 
 from noshows.evaluation import (
     calculate_cost,
-    get_threshold_predictions,
+    make_calls,
 )
 
 
@@ -45,7 +45,7 @@ def test_cost_when_everybody_is_contacted():
 def test_threshold_predictions(probabilities, threshold, expected):
     """Threshold should correctly convert probabilities to decisions."""
 
-    predictions = get_threshold_predictions(
+    predictions = make_calls(
         probabilities,
         threshold,
     )
@@ -56,7 +56,7 @@ def test_threshold_predictions(probabilities, threshold, expected):
 def test_threshold_predictions_return_binary_values():
     """Predictions should contain only zero and one."""
 
-    predictions = get_threshold_predictions(
+    predictions = make_calls(
         np.array([0.2, 0.4, 0.6, 0.8]),
         0.5,
     )
