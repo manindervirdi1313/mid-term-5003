@@ -4,13 +4,16 @@ emoji: hospital
 colorFrom: blue
 colorTo: green
 sdk: gradio
-sdk_version: 5.49.1
+sdk_version: 6.31.0
 app_file: app.py
 python_version: 3.12
 pinned: false
 ---
 
 # Maple Physio Appointment Risk Predictor
+
+## Group 4 Video Recording
+https://humberital.sharepoint.com/:v:/s/AIGC5006Group4/IQD15At_RDddT5ZFN-SvJW_gAVjKDmHk4IhjF3xLozBW8Zc?e=FvCcxv 
 
 ## What It Does
 
