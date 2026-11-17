@@ -1,0 +1,23 @@
+Maninder Singh Virdi Tasks
+- Project Conditions
+- Git Setup 
+- No Shows Python Scripts
+    - Appointments
+    - Data
+    - Evaluation
+    - Pipeline
+    - Predictor
+
+Tochukwu Adaobi Okafor Tasks
+- Models
+- Reports
+- Training
+- Gradle SetUps
+
+Ugochi Igwegbe Tasks
+Tests & Quality Assurance
+- Appointment Tests
+- Evaluation Outputs:
+- Pipeline Tests
+
+
